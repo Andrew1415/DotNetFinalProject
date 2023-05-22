@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\DotNetGalutinis.Client.props" />
+</Project>

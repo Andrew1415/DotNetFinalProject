@@ -1,0 +1,50 @@
+@page "/reservations"
+
+@attribute [Authorize]
+
+<PageTitle>Reservations</PageTitle>
+<RadzenStack>
+    <RadzenRow AlignItems="AlignItems.Center">
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenText Text="Reservations" TextStyle="TextStyle.H3" TagName="TagName.H1" style="margin: 0" />
+        </RadzenColumn>
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+                <RadzenButton Icon="add_circle_outline" Text="Add" Click="@AddButtonClick" Variant="Variant.Flat" />
+            </RadzenStack>
+        </RadzenColumn>
+    </RadzenRow>
+    <RadzenRow>
+      <RadzenColumn SizeMD=12>
+        <RadzenDataGrid @ref="grid0" ColumnWidth="200px"  AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+            Data="@reservations" Count=count LoadData=@Grid0LoadData  TItem="DotNetGalutinis.Server.Models.Inventory.Reservation" RowSelect="@EditRow" >
+            <Columns>
+                <RadzenDataGridColumn TItem="DotNetGalutinis.Server.Models.Inventory.Reservation" Property="ID" Title="ID">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="DotNetGalutinis.Server.Models.Inventory.Reservation" Property="User_ID" Title="User ID">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="DotNetGalutinis.Server.Models.Inventory.Reservation" Property="Item_ID" Title="Item ID">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="DotNetGalutinis.Server.Models.Inventory.Reservation" Property="From" Title="From">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="DotNetGalutinis.Server.Models.Inventory.Reservation" Property="To" Title="To">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="DotNetGalutinis.Server.Models.Inventory.Reservation" Property="UserInfo" Title="User Info">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="DotNetGalutinis.Server.Models.Inventory.Reservation" Property="ItemInfo" Title="Item Info">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="DotNetGalutinis.Server.Models.Inventory.Reservation" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
+                    <Template Context="reservation">
+
+                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Size="ButtonSize.Medium"
+                            Shade="Shade.Lighter" Variant="Variant.Flat"
+                            Click=@(args => GridDeleteButtonClick(args, reservation)) @onclick:stopPropagation="true" />
+                    </Template>
+                </RadzenDataGridColumn>
+            </Columns>
+
+        </RadzenDataGrid>
+
+    </RadzenColumn>
+  </RadzenRow>
+</RadzenStack>
